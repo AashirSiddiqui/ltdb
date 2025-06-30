@@ -10,6 +10,27 @@ namespace Global
         return -1;
     }
 
+    class Document {
+        public:
+        
+        std::vector<std::string> keys = {};
+        std::vector<std::string> values = {};
+
+        Document(std::vector<std::string> keys, std::vector<std::string> values) {
+            this->keys = keys; this->values = values;
+        }
+
+        std::string* getValue(std::string key) {
+            int index = findElementIndexInVector(keys, key);
+            if (index != -1) {
+                return &values[index];
+            }
+            else {
+                return NULL;
+            }
+        };
+    };
+
     class Database {
         public:
 
@@ -18,34 +39,13 @@ namespace Global
 
         Database(std::vector<std::string> keys);
 
-        int createDocument(std::vector<std::string> values = {""}) { // returns the new document's index
-            std::vector<std::string> emptyVector = {""};
-            if (values == emptyVector) { // no input values provided, so values has to be manually populated
+        int createDocument(std::vector<std::string> values = {}) { // returns the new document's index
+            if (values.empty()) { // no input values provided, so values has to be manually populated
             }
             else {
                 documents.push_back(Document(keys, values));
                 return (documents.size() - 1);
             }
         }
-    };
-
-    class Document {
-        public:
-        
-        std::vector<std::string> keys = {};
-        std::vector<std::string> values = {};
-
-        Document(std::vector<std::string> keys, std::vector<std::string> values);
-
-        std::string getValue(std::string key) {
-            int index = findElementIndexInVector(keys, key);
-            if (index != -1) {
-                std::string thisValue = values[index];
-                return thisValue;
-            }
-            else {
-                return NULL;
-            }
-        };
     };
 }

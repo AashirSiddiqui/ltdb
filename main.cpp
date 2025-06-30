@@ -7,11 +7,17 @@
 using namespace Global;
 
 int main() {
-    Document testDoc = Document();
-    testDoc.keys = {"created", "due"};
-    testDoc.values = {"true", "september 9th"};
+    std::vector<std::string> values = {"true", "september 9th"};
+    std::vector<std::string> keys = {"created", "due"};
+    Document testDoc = Document(keys, values);
 
-    std::cout << testDoc.getValue("created") << std::endl;
+    std::string* value = testDoc.getValue("created");
+    if (value != nullptr) {
+        std::cout << *value << std::endl;
+    }
+    else {
+        std::cout << "This key does not exist in the document" << std::endl;
+    }
 
     return 0;
 }
