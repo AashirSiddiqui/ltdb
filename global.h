@@ -20,8 +20,12 @@ namespace Global
             this->keys = keys; this->values = values;
         }
 
+        int findIndexOfKey(std::string key) {
+            return findElementIndexInVector(keys, key);
+        }
+
         std::string* getValue(std::string key) {
-            int index = findElementIndexInVector(keys, key);
+            int index = findIndexOfKey(key);
             if (index != -1) {
                 return &values[index];
             }
@@ -29,6 +33,10 @@ namespace Global
                 return nullptr;
             }
         };
+
+        void updateValue(std::string key, std::string newValue) {
+            values[findIndexOfKey(key)] = newValue;
+        }
     };
 
     class Database {
