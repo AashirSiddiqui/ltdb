@@ -1,6 +1,12 @@
 namespace Global
 {
 
+    enum Datatypes {
+        INT,
+        STRING,
+        BOOL, // acceptable values are "0" and "1"
+    };
+
     int findElementIndexInVector(std::vector<std::string> thisVector, std::string element) {
         for (int i = 0; i < thisVector.size(); i++) {
             if (thisVector[i] == element) {
@@ -44,11 +50,17 @@ namespace Global
 
         std::vector<Document> documents;
         std::vector<std::string> keys;
+        std::vector<int> keyTypes;
 
-        Database(std::vector<std::string> keys);
+        Database(std::vector<std::string> keys, std::vector<int> keyTypes) {
+            this->keys = keys; this->keyTypes = keyTypes;
+        };
 
         int createDocument(std::vector<std::string> values = {}) { // returns the new document's index
-            if (values.empty()) { // no input values provided, so values has to be manually populated
+            if (values.empty() || values.size() != keys.size()) { // no input values provided, so values has to be manually populated
+                for (int i = 0; i < keys.size(); i++) {
+                    values.push_back("");
+                }
             }
             else {
                 documents.push_back(Document(keys, values));

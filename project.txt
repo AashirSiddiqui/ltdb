@@ -7,6 +7,7 @@ Goals:
 3. Create functions to create, read, update, or delete documents.
 4. Store database as a single file (serialization).
 5. Implement CLI tool to work with the database files.
+6. Create error / info messages in CLI tool to make it easier to use
 
 Notes
 - REMEMBER TO MAKE SURE THAT EMPTY STRINGS CANNOT BE KEYS

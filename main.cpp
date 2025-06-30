@@ -7,9 +7,11 @@
 using namespace Global;
 
 int main() {
-    std::vector<std::string> values = {"true", "september 9th"};
+    std::vector<std::string> values = {"1", "september 9th"};
     std::vector<std::string> keys = {"created", "due"};
     Document testDoc = Document(keys, values);
+
+    testDoc.updateValue("created", "0");
 
     std::string* value = testDoc.getValue("created");
     if (value != nullptr) {
