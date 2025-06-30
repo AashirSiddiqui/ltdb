@@ -26,7 +26,7 @@ namespace Global
                 return &values[index];
             }
             else {
-                return NULL;
+                return nullptr;
             }
         };
     };

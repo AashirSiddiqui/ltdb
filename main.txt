@@ -1,4 +1,5 @@
 This project is a simple database system (like SQLite) that stores a list of documents (essentially dictionaries).
+https://austinhenley.com/blog/goodproject.html
 
 Goals:
 1. Store a dictionary of databases which function as lists with documents with key-value pairs in them.
