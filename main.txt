@@ -1,0 +1,8 @@
+This project is a simple database system (like SQLite) that stores a list of documents (essentially dictionaries).
+
+Goals:
+1. Store a dictionary of databases which function as lists with documents with key-value pairs in them.
+2. Create functions to create, read, and delete databases.
+3. Create functions to create, read, update, or delete documents.
+4. Store database as a single file (serialization).
+5. Implement CLI tool to work with the database files.
