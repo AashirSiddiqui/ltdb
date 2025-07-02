@@ -1,3 +1,8 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+
 namespace Global
 {
 
@@ -65,6 +70,20 @@ namespace Global
             else {
                 documents.push_back(Document(keys, values));
                 return (documents.size() - 1);
+            }
+        }
+
+        std::vector<Document> search(bool query=false, std::map<std::string, std::string> filters={}) { // example filters : { {"key1" : "true"},  {"key2" : "false"} }
+            std::vector<Document> results = {};
+
+            for (int i = 0; i < this->documents.size(); i++) {
+                Document thisDoc = this->documents.at(i);
+
+                if (query) {
+                }
+                else {
+                    results.push_back(thisDoc);
+                }
             }
         }
     };

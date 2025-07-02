@@ -2,7 +2,7 @@ This project is a simple database system (like SQLite) that stores a list of doc
 https://austinhenley.com/blog/goodproject.html
 
 Goals:
-1. Store a dictionary of databases which function as lists with documents with key-value pairs in them.
+1 X. Store a dictionary of databases which function as lists with documents with key-value pairs in them.
 2. Create functions to create, read, and delete databases.
 3. Create functions to create, read, update, or delete documents.
 4. Store database as a single file (serialization).
