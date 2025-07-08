@@ -59,7 +59,8 @@ namespace Global
         std::string toString() {
             std::string toReturn = "{";
             for (int i = 0; i < this->keys.size(); i++) {
-                toReturn += " " + keys.at(i) + " : " + values.at(i) + ",";
+                if (i!=0) {toReturn += ",";}
+                toReturn += " " + keys.at(i) + " : " + values.at(i);
             }
 
             return toReturn + " }";
@@ -83,10 +84,8 @@ namespace Global
                     values.push_back("");
                 }
             }
-            else {
-                documents.push_back(Document(keys, values));
-                return (documents.size() - 1);
-            }
+            documents.push_back(Document(keys, values));
+            return (documents.size() - 1);
         }
 
         int addDocument(Document doc) {
@@ -99,29 +98,26 @@ namespace Global
             }
         }
 
-        std::vector<Document>* search(std::map<std::string, std::string> filters={}) { // example filters : { {"key1" : "true"},  {"key2" : "false"} }
+        std::vector<Document> search(std::map<std::string, std::string> filters={}) { // example filters : { {"key1" : "true"},  {"key2" : "false"} }
             std::vector<Document> results = {};
 
             for (int i = 0; i < this->documents.size(); i++) {
                 Document thisDoc = this->documents.at(i);
 
-                std::cout << filters.size() << std::endl;
-                std::cout << thisDoc.toString() << std::endl;
                 if (filters.size() != 0) {
                     bool satisfiesConditions = true;
                     auto pair = filters.begin();
                     for (int i = 0; i < filters.size(); i++) {
                         if (thisDoc.hasKey(pair->first)) {
                             if (*thisDoc.getValue(pair->first) != pair->second) {
-                            }
-                            else {
                                 satisfiesConditions = false;
-                                continue;
+                                break;
                             }
                         }
                         else {
-                            return nullptr;
+                            return {};
                         }
+                        std::advance(pair, 1);
                     }
                     if (satisfiesConditions) {
                         results.push_back(thisDoc);
@@ -132,7 +128,15 @@ namespace Global
                 }
             }
 
-            return &results;
+            return results;
         }
     };
+
+    std::string vectorOfDocumentsToString(std::vector<Document> vectorOfDocs) {
+        std::string toReturn = "";
+        for (int i = 0; i < vectorOfDocs.size(); i++) {
+            toReturn += vectorOfDocs[i].toString() + "\n";
+        }
+        return toReturn;
+    }
 }

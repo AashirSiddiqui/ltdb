@@ -9,18 +9,22 @@ int main() {
     Document testDoc2 = Document(keys, values);
     Database thisDatabase = Database(keys, {BOOL, STRING});
 
+    std::vector<Database> system = {};
+
     testDoc.updateValue("created", "0");
 
     thisDatabase.addDocument(testDoc);
     thisDatabase.addDocument(testDoc2);
 
-    std::vector<Document>* results = thisDatabase.search();
-    if (results != nullptr) {
-        std::cout << (*results).at(0).toString() << std::endl;
+    system.push_back(thisDatabase);
+
+    std::vector<Document> results = thisDatabase.search({{"created", "2"}});
+    if (results.size() != 0) {
+        std::cout << vectorOfDocumentsToString(results);
     }
     else {
         // std::cout << results << std::endl;
-        std::cout << "One or more of the keys in the filters do not exist in this database, or the database is empty" << std::endl;
+        std::cout << "One or more of the keys in the filters do not exist in this database, or the database is empty, or no documents match the filter" << std::endl;
     }
 
     return 0;
